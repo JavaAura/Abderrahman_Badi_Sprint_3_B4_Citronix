@@ -1,5 +1,7 @@
 package com.citronix.dto;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,5 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HarvestDetailDTO {
-    private long id;
+
+    private double yield;
+    private LocalDate harvestedAt;
+    private TreeDTO tree;
+    private HarvestDTO harvest;
+
 }
