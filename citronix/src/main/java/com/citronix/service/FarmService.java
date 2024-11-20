@@ -20,7 +20,6 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @Log4j2
 public class FarmService {
-    private final List<String> VALID_INCLUDES = Arrays.asList("trainer", "program", "students");
 
     @Autowired
     private FarmRepository farmRepository;
