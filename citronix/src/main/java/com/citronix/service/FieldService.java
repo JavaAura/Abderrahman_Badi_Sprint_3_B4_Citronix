@@ -1,6 +1,15 @@
 package com.citronix.service;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.citronix.dto.FieldDTO;
+import com.citronix.mapper.FieldMapper;
+import com.citronix.model.Field;
+import com.citronix.repository.FieldRepository;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -11,5 +20,31 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @Log4j2
 public class FieldService {
+    private final List<String> VALID_INCLUDES = Arrays.asList("trainer", "program", "students");
 
+    @Autowired
+    private FieldRepository fieldRepository;
+
+    @Autowired
+    private FieldMapper fieldMapper;
+
+    public FieldDTO findFieldById(long id, String... with) {
+        return null;
+    }
+
+    public List<FieldDTO> getFieldList(String... with) {
+        return null;
+    }
+
+    public FieldDTO addField(Field field) {
+        return null;
+    }
+
+    public FieldDTO updateField(Field field, long fieldId) {
+        return null;
+    }
+
+    public FieldDTO deleteFieldById(long fieldId) {
+        return null;
+    }
 }
