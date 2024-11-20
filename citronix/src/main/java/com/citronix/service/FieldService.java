@@ -28,11 +28,11 @@ public class FieldService {
     @Autowired
     private FieldMapper fieldMapper;
 
-    public FieldDTO findFieldById(long id, String... with) {
+    public FieldDTO getFieldById(long id, String... with) {
         return null;
     }
 
-    public List<FieldDTO> getFieldList(String... with) {
+    public List<FieldDTO> getAllFields(String... with) {
         return null;
     }
 
@@ -40,7 +40,7 @@ public class FieldService {
         return null;
     }
 
-    public FieldDTO updateField(Field field, long fieldId) {
+    public FieldDTO updateField(long fieldId, Field field) {
         return null;
     }
 

@@ -1,6 +1,6 @@
 package com.citronix.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ public class TreeDTO {
     private long id;
     private int age;
     private double annualProductivity;
-    private LocalDateTime createdAt;
+    private LocalDate PlantedAt;
     private FieldDTO field;
     private List<HarvestDetailDTO> harvestDetails;
 

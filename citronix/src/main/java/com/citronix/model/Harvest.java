@@ -51,9 +51,9 @@ public class Harvest {
 
     @NotNull(message = "surface is required")
     @Positive(message = "surface should not be negative")
-    private int harvestYear;
+    private Integer harvestYear;
 
-    private double totalYield;
+    private Double totalYield;
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)

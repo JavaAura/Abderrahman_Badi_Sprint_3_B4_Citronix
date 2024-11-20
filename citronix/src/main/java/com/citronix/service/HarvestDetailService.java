@@ -10,6 +10,7 @@ import com.citronix.dto.HarvestDetailDTO;
 import com.citronix.mapper.HarvestDetailMapper;
 import com.citronix.model.HarvestDetail;
 import com.citronix.repository.HarvestDetailRepository;
+import com.citronix.util.HarvestDetailId;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -28,11 +29,11 @@ public class HarvestDetailService {
     @Autowired
     private HarvestDetailMapper harvestDetailMapper;
 
-    public HarvestDetailDTO findHarvestDetailById(long id, String... with) {
+    public HarvestDetailDTO getHarvestDetailById(long id, String... with) {
         return null;
     }
 
-    public List<HarvestDetailDTO> getHarvestDetailList(String... with) {
+    public List<HarvestDetailDTO> getAllHarvestDetails(String... with) {
         return null;
     }
 
@@ -40,11 +41,11 @@ public class HarvestDetailService {
         return null;
     }
 
-    public HarvestDetailDTO updateHarvestDetail(HarvestDetail harvestDetail, long harvestDetailId) {
+    public HarvestDetailDTO updateHarvestDetail(long harvestDetailId, HarvestDetail harvestDetail) {
         return null;
     }
 
-    public HarvestDetailDTO deleteHarvestDetailById(long harvestDetailId) {
+    public HarvestDetailDTO deleteHarvestDetailById(HarvestDetailId harvestDetailId) {
         return null;
     }
 }

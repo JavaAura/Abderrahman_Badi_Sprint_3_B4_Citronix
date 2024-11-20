@@ -28,11 +28,11 @@ public class FarmService {
     @Autowired
     private FarmMapper farmMapper;
 
-    public FarmDTO findFarmById(long id, String... with) {
+    public FarmDTO getFarmById(long id, String... with) {
         return null;
     }
 
-    public List<FarmDTO> getFarmList(String... with) {
+    public List<FarmDTO> getAllFarms(String... with) {
         return null;
     }
 
@@ -40,7 +40,7 @@ public class FarmService {
         return null;
     }
 
-    public FarmDTO updateFarm(Farm farm, long farmId) {
+    public FarmDTO updateFarm(long farmId, Farm farm) {
         return null;
     }
 

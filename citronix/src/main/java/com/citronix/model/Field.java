@@ -45,7 +45,7 @@ public class Field {
     @NotNull(message = "surface is required")
     @Positive(message = "surface should not be negative")
     @Min(value = 1000)
-    private double surface;
+    private Double surface;
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)

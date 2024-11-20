@@ -28,11 +28,11 @@ public class TreeService {
     @Autowired
     private TreeMapper treeMapper;
 
-    public TreeDTO findTreeById(long id, String... with) {
+    public TreeDTO getTreeById(long id, String... with) {
         return null;
     }
 
-    public List<TreeDTO> getTreeList(String... with) {
+    public List<TreeDTO> getAllTrees(String... with) {
         return null;
     }
 
@@ -40,7 +40,7 @@ public class TreeService {
         return null;
     }
 
-    public TreeDTO updateTree(Tree tree, long treeId) {
+    public TreeDTO updateTree(long treeId, Tree tree) {
         return null;
     }
 

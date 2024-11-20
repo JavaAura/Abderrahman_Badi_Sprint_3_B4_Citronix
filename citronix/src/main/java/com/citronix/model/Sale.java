@@ -52,9 +52,9 @@ public class Sale {
 
     @NotNull(message = "unit price is required")
     @Positive(message = "unit price should not be negative")
-    private double unitPrice;
+    private Double unitPrice;
 
-    private double totalRevenue;
+    private Double totalRevenue;
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)

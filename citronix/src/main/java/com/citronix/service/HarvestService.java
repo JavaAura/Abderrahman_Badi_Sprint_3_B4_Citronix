@@ -28,11 +28,11 @@ public class HarvestService {
     @Autowired
     private HarvestMapper harvestMapper;
 
-    public HarvestDTO findHarvestById(long id, String... with) {
+    public HarvestDTO getHarvestById(long id, String... with) {
         return null;
     }
 
-    public List<HarvestDTO> getHarvestList(String... with) {
+    public List<HarvestDTO> getAllHarvests(String... with) {
         return null;
     }
 
@@ -40,7 +40,7 @@ public class HarvestService {
         return null;
     }
 
-    public HarvestDTO updateHarvest(Harvest harvest, long harvestId) {
+    public HarvestDTO updateHarvest(long harvestId, Harvest harvest) {
         return null;
     }
 

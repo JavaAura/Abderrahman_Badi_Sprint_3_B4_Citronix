@@ -28,11 +28,11 @@ public class SaleService {
     @Autowired
     private SaleMapper saleMapper;
 
-    public SaleDTO findSaleById(long id, String... with) {
+    public SaleDTO getSaleById(long id, String... with) {
         return null;
     }
 
-    public List<SaleDTO> getSaleList(String... with) {
+    public List<SaleDTO> getAllSales(String... with) {
         return null;
     }
 
@@ -40,7 +40,7 @@ public class SaleService {
         return null;
     }
 
-    public SaleDTO updateSale(Sale sale, long saleId) {
+    public SaleDTO updateSale(long saleId, Sale sale) {
         return null;
     }
 
