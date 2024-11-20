@@ -52,7 +52,7 @@ public class HarvestDetail {
 
     @NotNull(message = "surface is required")
     @Positive(message = "surface should not be negative")
-    private double yield;
+    private Double yield;
 
     @NotNull(message = "harvest date is required")
     @JsonFormat(pattern = "dd-MM-yyyy")
