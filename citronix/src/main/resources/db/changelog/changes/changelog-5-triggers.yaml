@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: "5"
+      author: Abderrahman
+      changes:
+        - sql:
+            endDelimiter: $$
+            dbms: "postgresql"
+            sql: |
+                CREATE OR REPLACE FUNCTION update_total_yield()
+                RETURNS TRIGGER AS $$
+                BEGIN
+                    UPDATE harvests
+                    SET total_yield = (
+                        SELECT SUM(yield)
+                        FROM harvest_tree
+                        WHERE harvest_id = NEW.harvest_id
+                        AND deleted_at IS NULL
+                    )
+                    WHERE id = NEW.harvest_id;
+
+                    RETURN NEW;
+                END;
+                $$ LANGUAGE plpgsql;
+
+                CREATE TRIGGER after_insert_or_update_harvest_details
+                AFTER INSERT OR UPDATE
+                ON harvest_tree
+                FOR EACH ROW
+                EXECUTE FUNCTION update_total_yield();
+
+        - sql:
+            endDelimiter: $$
+            dbms: "postgresql"
+            sql: |
+                CREATE OR REPLACE FUNCTION update_total_revenue_from_harvests()
+                RETURNS TRIGGER AS $$
+                BEGIN
+                    UPDATE sales
+                    SET total_revenue = unit_price * NEW.total_yield
+                    WHERE harvest_id = NEW.id;
+
+                    RETURN NEW;
+                END;
+                $$ LANGUAGE plpgsql;
+
+                CREATE TRIGGER after_insert_or_update_harvest
+                AFTER INSERT OR UPDATE
+                ON harvests
+                FOR EACH ROW
+                EXECUTE FUNCTION update_total_revenue_from_harvests();
+
+        - sql:
+            endDelimiter: $$
+            dbms: "postgresql"
+            sql: |
+                CREATE OR REPLACE FUNCTION update_total_revenue_from_sales()
+                RETURNS TRIGGER AS $$
+                BEGIN
+                    IF (NEW.unit_price IS DISTINCT FROM OLD.unit_price OR NEW.harvest_id IS DISTINCT FROM OLD.harvest_id) THEN
+                        UPDATE sales
+                        SET total_revenue = unit_price * (SELECT total_yield FROM harvests WHERE id = NEW.harvest_id)
+                        WHERE harvest_id = NEW.harvest_id;
+                    END IF;
+
+                    RETURN NEW;
+                END;
+                $$ LANGUAGE plpgsql;
+
+                CREATE TRIGGER after_insert_or_update_sales
+                AFTER INSERT OR UPDATE OF unit_price, harvest_id
+                ON sales
+                FOR EACH ROW
+                EXECUTE FUNCTION update_total_revenue_from_sales();

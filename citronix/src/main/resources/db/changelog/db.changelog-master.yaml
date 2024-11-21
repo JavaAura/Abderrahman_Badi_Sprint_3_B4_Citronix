@@ -1,5 +1,21 @@
 # src/main/resources/db/changelog/db.changelog-master.yaml
 databaseChangeLog:
   - include:
-      file: changes/changelog-1.yaml
+      file: changes/changelog-1-schema.yaml
       relativeToChangelogFile: true
+  - include:
+      file: changes/changelog-2-constraints.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changes/changelog-3-inserts.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changes/changelog-4-inserts.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changes/changelog-5-triggers.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changes/changelog-6-inserts.yaml
+      relativeToChangelogFile: true
+
