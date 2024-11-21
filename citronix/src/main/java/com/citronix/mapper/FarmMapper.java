@@ -16,8 +16,9 @@ import com.citronix.model.Field;
 public class FarmMapper {
     private final List<String> VALID_INCLUDES = Arrays.asList("fields");
 
-    public void verifyIncludes(List<String> includesList)
+    public void verifyIncludes(String... with)
             throws InvalidDataException {
+        List<String> includesList = Arrays.asList(with);
 
         for (String include : includesList) {
             if (!include.isEmpty() && !VALID_INCLUDES.contains(include)) {
@@ -35,7 +36,9 @@ public class FarmMapper {
                 .build();
     }
 
-    public FarmDTO convertToDTO(Farm farm, List<String> includesList) {
+    public FarmDTO convertToDTO(Farm farm, String... with) {
+        List<String> includesList = Arrays.asList(with);
+
         List<FieldDTO> fieldDTOs = null;
 
         if (includesList.contains("fields")) {
@@ -58,9 +61,8 @@ public class FarmMapper {
     }
 
     public List<FarmDTO> convertToDTOList(List<Farm> farms, String... with) {
-        List<String> includes = Arrays.asList(with);
         return farms.stream()
-                .map(farm -> convertToDTO(farm, includes))
+                .map(farm -> convertToDTO(farm, with))
                 .collect(Collectors.toList());
     }
 }

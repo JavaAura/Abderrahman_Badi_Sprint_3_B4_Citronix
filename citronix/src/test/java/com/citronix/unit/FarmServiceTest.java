@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.citronix.dto.FarmDTO;
+import com.citronix.exceptions.InvalidDataException;
 import com.citronix.exceptions.ResourceNotFoundException;
 import com.citronix.model.Farm;
 import com.citronix.repository.FarmRepository;
@@ -69,7 +70,7 @@ public class FarmServiceTest {
     }
 
      @Test
-    void testGetFarmById_Success() {
+    void testGetFarmById_Success() throws ResourceNotFoundException, InvalidDataException {
         when(farmRepository.findById(1L)).thenReturn(Optional.of(farm));
 
         FarmDTO result = farmService.getFarmById(1L);

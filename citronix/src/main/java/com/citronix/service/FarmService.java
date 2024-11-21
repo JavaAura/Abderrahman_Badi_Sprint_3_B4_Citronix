@@ -1,12 +1,13 @@
 package com.citronix.service;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.citronix.dto.FarmDTO;
+import com.citronix.exceptions.InvalidDataException;
+import com.citronix.exceptions.ResourceNotFoundException;
 import com.citronix.mapper.FarmMapper;
 import com.citronix.model.Farm;
 import com.citronix.repository.FarmRepository;
@@ -27,8 +28,10 @@ public class FarmService {
     @Autowired
     private FarmMapper farmMapper;
 
-    public FarmDTO getFarmById(long id, String... with) {
-        return null;
+    public FarmDTO getFarmById(long id, String... with) throws ResourceNotFoundException, InvalidDataException {
+        farmMapper.verifyIncludes(with);
+        Farm farm = farmRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Farm not found"));
+        return farmMapper.convertToDTO(farm, with);
     }
 
     public List<FarmDTO> getAllFarms(String... with) {
