@@ -16,6 +16,7 @@ public class FieldDTO {
     private long id;
     private double surface;
     private FarmDTO farm;
+    private int treesCount;
     private List<TreeDTO> trees;
 
 }

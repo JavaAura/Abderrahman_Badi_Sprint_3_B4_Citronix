@@ -1,0 +1,207 @@
+databaseChangeLog:
+  - changeSet:
+      id: "4"
+      author: Abderrahman
+      changes:
+        - addDefaultValue:
+            tableName: trees
+            columnName: planted_at
+            columnDataType: DATE
+            defaultValueComputed: "CURRENT_DATE"
+
+        - addDefaultValue:
+            tableName: harvests
+            columnName: total_yield
+            columnDataType: INTEGER
+            defaultValueNumeric: 0
+
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2019-04-30"
+              - column:
+                  name: field_id
+                  value: "1"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2019-04-30"
+              - column:
+                  name: field_id
+                  value: "1"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2004-11-20"
+              - column:
+                  name: field_id
+                  value: "1"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2010-03-01"
+              - column:
+                  name: field_id
+                  value: "2"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2010-03-01"
+              - column:
+                  name: field_id
+                  value: "2"
+
+
+
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2010-03-01"
+              - column:
+                  name: field_id
+                  value: "5"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2010-03-01"
+              - column:
+                  name: field_id
+                  value: "5"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2010-03-01"
+              - column:
+                  name: field_id
+                  value: "5"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2010-03-01"
+              - column:
+                  name: field_id
+                  value: "5"
+
+
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2016-03-10"
+              - column:
+                  name: field_id
+                  value: "11"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2016-03-10"
+              - column:
+                  name: field_id
+                  value: "11"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2016-03-10"
+              - column:
+                  name: field_id
+                  value: "11"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2016-03-10"
+              - column:
+                  name: field_id
+                  value: "11"
+
+
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2020-04-11"
+              - column:
+                  name: field_id
+                  value: "13"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2020-04-11"
+              - column:
+                  name: field_id
+                  value: "13"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2020-04-11"
+              - column:
+                  name: field_id
+                  value: "13"
+        - insert:
+            tableName: trees
+            columns:
+              - column:
+                  name: planted_at
+                  value: "2020-04-11"
+              - column:
+                  name: field_id
+                  value: "13"
+
+
+        - insert:
+            tableName: harvests
+            columns:
+              - column:
+                  name: season
+                  value: "FALL"
+              - column:
+                  name: harvest_year
+                  value: "2024"
+        - insert:
+            tableName: harvests
+            columns:
+              - column:
+                  name: season
+                  value: "SPRING"
+              - column:
+                  name: harvest_year
+                  value: "2024"
+        - insert:
+            tableName: harvests
+            columns:
+              - column:
+                  name: season
+                  value: "SUMMER"
+              - column:
+                  name: harvest_year
+                  value: "2024"
+

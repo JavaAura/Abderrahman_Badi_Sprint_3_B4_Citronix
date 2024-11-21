@@ -1,0 +1,220 @@
+databaseChangeLog:
+  - changeSet:
+      id: "3"
+      author: Abderrahman
+      changes:
+        - insert:
+            tableName: farms
+            columns:
+              - column:
+                  name: name
+                  value: "Farm 1"
+              - column:
+                  name: address
+                  value: "921 Counts Lane"
+              - column:
+                  name: surface
+                  value: "2000"
+        - insert:
+            tableName: farms
+            columns:
+              - column:
+                  name: name
+                  value: "Farm 2"
+              - column:
+                  name: address
+                  value: "1630 Pooh Bear Lane"
+              - column:
+                  name: surface
+                  value: "4000"
+        - insert:
+            tableName: farms
+            columns:
+              - column:
+                  name: name
+                  value: "Farm 3"
+              - column:
+                  name: address
+                  value: "4261 Henry Ford Avenue"
+              - column:
+                  name: surface
+                  value: "15000"
+        - insert:
+            tableName: farms
+            columns:
+              - column:
+                  name: name
+                  value: "Farm 4"
+              - column:
+                  name: address
+                  value: "931 Fidler Drive"
+              - column:
+                  name: surface
+                  value: "2000"
+        - insert:
+            tableName: farms
+            columns:
+              - column:
+                  name: name
+                  value: "Farm 5"
+              - column:
+                  name: address
+                  value: "1320 Nickel Road"
+              - column:
+                  name: surface
+                  value: "2000"
+
+
+
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "500"
+              - column:
+                  name: farm_id
+                  value: "1"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "500"
+              - column:
+                  name: farm_id
+                  value: "1"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "500"
+              - column:
+                  name: farm_id
+                  value: "1"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "500"
+              - column:
+                  name: farm_id
+                  value: "1"
+
+
+
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "2000"
+              - column:
+                  name: farm_id
+                  value: "2"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "750"
+              - column:
+                  name: farm_id
+                  value: "2"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "750"
+              - column:
+                  name: farm_id
+                  value: "2"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "500"
+              - column:
+                  name: farm_id
+                  value: "2"
+
+
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "5000"
+              - column:
+                  name: farm_id
+                  value: "3"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "4000"
+              - column:
+                  name: farm_id
+                  value: "3"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "3000"
+              - column:
+                  name: farm_id
+                  value: "3"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "3000"
+              - column:
+                  name: farm_id
+                  value: "3"
+
+
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "1100"
+              - column:
+                  name: farm_id
+                  value: "4"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "300"
+              - column:
+                  name: farm_id
+                  value: "4"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "300"
+              - column:
+                  name: farm_id
+                  value: "4"
+        - insert:
+            tableName: fields
+            columns:
+              - column:
+                  name: surface
+                  value: "300"
+              - column:
+                  name: farm_id
+                  value: "4"
+

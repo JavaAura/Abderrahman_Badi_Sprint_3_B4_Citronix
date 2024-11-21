@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: "2"
+      author: Abderrahman
+      
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: fields
+            baseColumnNames: farm_id
+            constraintName: field_farm_fk
+            referencedTableName: farms
+            referencedColumnNames: id
+            
+        - addForeignKeyConstraint:
+            baseTableName: trees
+            baseColumnNames: field_id
+            constraintName: tree_field_fk
+            referencedTableName: fields
+            referencedColumnNames: id
+
+        - addPrimaryKey:
+            tableName: harvest_tree
+            columnNames: harvest_id, tree_id
+            constraintName: harvest_tree_pk
+
+        - addForeignKeyConstraint:
+            baseTableName: harvest_tree
+            baseColumnNames: tree_id
+            constraintName: harvest_tree_fk_1
+            referencedTableName: trees
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: harvest_tree
+            baseColumnNames: harvest_id
+            constraintName: harvest_tree_fk_2
+            referencedTableName: harvests
+            referencedColumnNames: id
+            
+        - addForeignKeyConstraint:
+            baseTableName: sales
+            baseColumnNames: harvest_id
+            constraintName: sale_harvest_fk
+            referencedTableName: harvests
+            referencedColumnNames: id
+

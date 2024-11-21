@@ -1,0 +1,210 @@
+databaseChangeLog:
+  - changeSet:
+      id: "6"
+      author: Abderrahman
+      changes:
+        - renameColumn:
+            tableName: harvest_tree
+            oldColumnName: yeild
+            newColumnName: yield
+            columnDataType: DOUBLE
+
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "1"
+              - column:
+                  name: yield
+                  value: "200"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-20"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "2"
+              - column:
+                  name: yield
+                  value: "170"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-20"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "4"
+              - column:
+                  name: yield
+                  value: "167"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-20"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "5"
+              - column:
+                  name: yield
+                  value: "100.67"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-20"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "6"
+              - column:
+                  name: yield
+                  value: "197"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-20"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "7"
+              - column:
+                  name: yield
+                  value: "133.93"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-20"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "8"
+              - column:
+                  name: yield
+                  value: "250"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-21"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "9"
+              - column:
+                  name: yield
+                  value: "190.19"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-21"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "10"
+              - column:
+                  name: yield
+                  value: "188"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-21"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "11"
+              - column:
+                  name: yield
+                  value: "300"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-21"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "12"
+              - column:
+                  name: yield
+                  value: "170.7"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-21"
+        - insert:
+            tableName: harvest_tree
+            columns:
+              - column:
+                  name: harvest_id
+                  value: "1"
+              - column:
+                  name: tree_id
+                  value: "13"
+              - column:
+                  name: yield
+                  value: "250.50"
+              - column:
+                  name: harvested_at
+                  value: "2024-11-21"
+
+
+        - insert:
+            tableName: sales
+            columns:
+              - column:
+                  name: client
+                  value: "John Doe"
+              - column:
+                  name: sale_date
+                  value: "2024-11-25"
+              - column:
+                  name: unit_price
+                  value: "2.5"
+              - column:
+                  name: harvest_id
+                  value: "1"
+        
+
