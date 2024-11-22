@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.citronix.dto.FarmDTO;
 import com.citronix.dto.FieldDTO;
@@ -12,7 +12,7 @@ import com.citronix.exceptions.InvalidDataException;
 import com.citronix.model.Farm;
 import com.citronix.model.Field;
 
-@Service
+@Component
 public class FarmMapper {
     private final List<String> VALID_INCLUDES = Arrays.asList("fields");
 

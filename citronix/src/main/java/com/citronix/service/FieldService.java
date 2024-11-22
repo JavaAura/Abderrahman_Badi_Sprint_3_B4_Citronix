@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.citronix.dto.FieldDTO;
 import com.citronix.exceptions.InvalidDataException;
@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j2;
  * Service interface for Field entity.
  * Defines methods for CRUD operations and additional business logic.
  */
-@Component
+@Service
 @Log4j2
 public class FieldService {
 
