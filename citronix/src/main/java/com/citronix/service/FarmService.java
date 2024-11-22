@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.citronix.dto.FarmCriteria;
 import com.citronix.dto.FarmDTO;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
  * Service interface for Farm entity.
  * Defines methods for CRUD operations and additional business logic.
  */
-@Service
+@Component
 @Log4j2
 public class FarmService {
 
@@ -56,7 +56,6 @@ public class FarmService {
     }
 
     public List<FarmDTO> searchFarms(FarmCriteria criteria) throws ResourceNotFoundException {
-        log.info("Criteria object : " + criteria);
         Specification<Farm> spec = FarmSpecification.withFilters(criteria);
         List<Farm> farms = farmRepository.findAll(spec);
         if (farms.isEmpty())

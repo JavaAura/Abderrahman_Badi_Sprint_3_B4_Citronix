@@ -3,15 +3,11 @@ package com.citronix.feature;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-@Transactional
-@Rollback(true)
-public class TreeControllerIntegrationTest {
+public class TreeControllerIntegrationTest extends BaseDev {
 
     @Test
     void getAllTrees_success() {

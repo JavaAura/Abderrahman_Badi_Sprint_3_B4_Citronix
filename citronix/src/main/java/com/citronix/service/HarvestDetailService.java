@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.citronix.dto.HarvestDetailDTO;
 import com.citronix.mapper.HarvestDetailMapper;
@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
  * Service interface for HarvestDetail entity.
  * Defines methods for CRUD operations and additional business logic.
  */
-@Service
+@Component
 @Log4j2
 public class HarvestDetailService {
     private final List<String> VALID_INCLUDES = Arrays.asList("trainer", "program", "students");

@@ -106,6 +106,7 @@ public class FarmServiceTest {
     void testUpdateFarm() throws ResourceNotFoundException {
         Farm updatedFarm = new Farm(1L, "Updated farm", "Updated address", null, null, null, null, null);
         FarmDTO updatedFarmDTO = new FarmDTO(1L, "Updated farm", "Updated address", null, null);
+        
         when(farmRepository.findById(1L)).thenReturn(Optional.of(farm));
         when(farmRepository.save(farm)).thenReturn(updatedFarm);
 

@@ -71,5 +71,4 @@ public class FarmMapper {
                 .map(farm -> convertToDTO(farm, with))
                 .collect(Collectors.toList());
     }
-
 }
