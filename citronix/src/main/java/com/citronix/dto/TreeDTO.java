@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TreeDTO {
 
-    private long id;
-    private int age;
-    private double annualProductivity;
+    private Long id;
+    private Integer age;
+    private Double annualProductivity;
     private LocalDate PlantedAt;
     private FieldDTO field;
     private List<HarvestDetailDTO> harvestDetails;
