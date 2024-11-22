@@ -36,6 +36,12 @@ public class FarmMapper {
                 .build();
     }
 
+    public List<FarmDTO> convertToDTOList(List<Farm> farms) {
+        return farms.stream()
+                .map(farm -> convertToDTO(farm))
+                .collect(Collectors.toList());
+    }
+
     public FarmDTO convertToDTO(Farm farm, String... with) {
         List<String> includesList = Arrays.asList(with);
 
@@ -65,4 +71,5 @@ public class FarmMapper {
                 .map(farm -> convertToDTO(farm, with))
                 .collect(Collectors.toList());
     }
+
 }

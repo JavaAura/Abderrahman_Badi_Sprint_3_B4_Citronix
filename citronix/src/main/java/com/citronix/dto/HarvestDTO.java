@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class HarvestDTO {
 
-    private long id;
+    private Long id;
     private Season season;
-    private int harvestYear;
-    private double totalYield;
+    private Integer harvestYear;
+    private Double totalYield;
     private SaleDTO sale;
     private List<HarvestDetailDTO> harvestDetails;
 

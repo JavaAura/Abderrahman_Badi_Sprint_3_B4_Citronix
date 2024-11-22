@@ -16,8 +16,8 @@ public class SaleDTO {
     private Long id;
     private String client;
     private LocalDate saleDate;
-    private double unitPrice;
-    private double totalRevenue;
+    private Double unitPrice;
+    private Double totalRevenue;
     private HarvestDTO harvest;
 
 }

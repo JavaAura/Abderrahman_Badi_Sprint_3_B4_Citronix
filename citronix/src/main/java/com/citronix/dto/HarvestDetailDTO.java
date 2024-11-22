@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class HarvestDetailDTO {
 
-    private double yield;
+    private Double yield;
     private LocalDate harvestedAt;
     private TreeDTO tree;
     private HarvestDTO harvest;

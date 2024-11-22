@@ -15,7 +15,7 @@ databaseChangeLog:
                         SELECT SUM(yield)
                         FROM harvest_tree
                         WHERE harvest_id = NEW.harvest_id
-                        AND deleted_at IS NULL
+                        AND removed_at IS NULL
                     )
                     WHERE id = NEW.harvest_id;
 

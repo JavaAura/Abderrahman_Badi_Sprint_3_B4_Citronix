@@ -21,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import com.citronix.dto.FarmDTO;
 import com.citronix.exceptions.InvalidDataException;
 import com.citronix.exceptions.ResourceNotFoundException;
+import com.citronix.mapper.FarmMapper;
 import com.citronix.model.Farm;
 import com.citronix.repository.FarmRepository;
 import com.citronix.service.FarmService;
@@ -32,11 +33,17 @@ public class FarmServiceTest {
     @Mock
     private FarmRepository farmRepository;
 
+    @Mock
+    private FarmMapper farmMapper;
+
     private Farm farm;
+
+    private FarmDTO farmDTO;
 
     @BeforeEach
     void setUp() {
-        farm = new Farm(1L, "Test farm", "Test address",2500D, null, null, null, null);
+        farm = new Farm(1L, "Test farm", "Test address", 2500D, null, null, null, null);
+        farmDTO = new FarmDTO(1L, "Test farm", "Test address", 2500D, null);
         MockitoAnnotations.openMocks(this);
     }
 
@@ -44,6 +51,8 @@ public class FarmServiceTest {
     void testAddFarm() {
 
         when(farmRepository.save(farm)).thenReturn(farm);
+
+        when(farmMapper.convertToDTO(farm)).thenReturn(farmDTO);
 
         FarmDTO result = farmService.addFarm(farm);
 
@@ -56,10 +65,13 @@ public class FarmServiceTest {
     void testGetAllFarms() {
         List<Farm> farms = Arrays.asList(
                 farm,
-                new Farm(2L, "Second farm", "Another address", 3000D, null, null, null, null)
-        );
+                new Farm(2L, "Second farm", "Another address", 3000D, null, null, null, null));
+
+        List<FarmDTO> farmDTOs = Arrays.asList(farmDTO, new FarmDTO(2L, "Second farm", "Another address", 3000D, null));
 
         when(farmRepository.findAll()).thenReturn(farms);
+
+        when(farmMapper.convertToDTOList(farms)).thenReturn(farmDTOs);
 
         List<FarmDTO> result = farmService.getAllFarms();
 
@@ -69,9 +81,11 @@ public class FarmServiceTest {
         verify(farmRepository, times(1)).findAll();
     }
 
-     @Test
+    @Test
     void testGetFarmById_Success() throws ResourceNotFoundException, InvalidDataException {
         when(farmRepository.findById(1L)).thenReturn(Optional.of(farm));
+
+        when(farmMapper.convertToDTO(farm)).thenReturn(farmDTO);
 
         FarmDTO result = farmService.getFarmById(1L);
 
@@ -89,10 +103,13 @@ public class FarmServiceTest {
     }
 
     @Test
-    void testUpdateFarm() {
+    void testUpdateFarm() throws ResourceNotFoundException {
         Farm updatedFarm = new Farm(1L, "Updated farm", "Updated address", null, null, null, null, null);
+        FarmDTO updatedFarmDTO = new FarmDTO(1L, "Updated farm", "Updated address", null, null);
         when(farmRepository.findById(1L)).thenReturn(Optional.of(farm));
         when(farmRepository.save(farm)).thenReturn(updatedFarm);
+
+        when(farmMapper.convertToDTO(updatedFarm)).thenReturn(updatedFarmDTO);
 
         FarmDTO result = farmService.updateFarm(1L, updatedFarm);
 
@@ -104,7 +121,7 @@ public class FarmServiceTest {
     }
 
     @Test
-    void testDeleteFarm() {
+    void testDeleteFarm() throws ResourceNotFoundException {
         when(farmRepository.findById(1L)).thenReturn(Optional.of(farm));
         doNothing().when(farmRepository).delete(farm);
 

@@ -64,7 +64,7 @@ databaseChangeLog:
                   name: updated_at
                   type: TIMESTAMP
               - column:
-                  name: deleted_at
+                  name: removed_at
                   type: TIMESTAMP
 
 
@@ -98,7 +98,7 @@ databaseChangeLog:
                   name: updated_at
                   type: TIMESTAMP
               - column:
-                  name: deleted_at
+                  name: removed_at
                   type: TIMESTAMP
 
 
@@ -132,7 +132,7 @@ databaseChangeLog:
                   name: updated_at
                   type: TIMESTAMP
               - column:
-                  name: deleted_at
+                  name: removed_at
                   type: TIMESTAMP
 
         
@@ -171,7 +171,7 @@ databaseChangeLog:
                   name: updated_at
                   type: TIMESTAMP
               - column:
-                  name: deleted_at
+                  name: removed_at
                   type: TIMESTAMP
 
 
@@ -208,7 +208,7 @@ databaseChangeLog:
                   name: updated_at
                   type: TIMESTAMP
               - column:
-                  name: deleted_at
+                  name: removed_at
                   type: TIMESTAMP
 
 
@@ -255,6 +255,6 @@ databaseChangeLog:
                   name: updated_at
                   type: TIMESTAMP
               - column:
-                  name: deleted_at
+                  name: removed_at
                   type: TIMESTAMP
 
