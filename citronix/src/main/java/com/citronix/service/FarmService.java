@@ -4,14 +4,17 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.citronix.dto.FarmCriteria;
 import com.citronix.dto.FarmDTO;
 import com.citronix.exceptions.InvalidDataException;
 import com.citronix.exceptions.ResourceNotFoundException;
 import com.citronix.mapper.FarmMapper;
 import com.citronix.model.Farm;
 import com.citronix.repository.FarmRepository;
+import com.citronix.specifications.FarmSpecification;
 
 import org.apache.commons.lang3.StringUtils;
 import lombok.extern.log4j.Log4j2;
@@ -38,7 +41,6 @@ public class FarmService {
     public FarmDTO getFarmById(long id, String... with) throws ResourceNotFoundException, InvalidDataException {
         farmMapper.verifyIncludes(with);
         Farm farm = farmRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Farm not found"));
-        log.info("Farm :" + farmMapper.convertToDTO(farm).toString());
         return farmMapper.convertToDTO(farm, with);
     }
 
@@ -50,7 +52,15 @@ public class FarmService {
 
     public List<FarmDTO> getAllFarms() {
         List<Farm> farms = farmRepository.findAll();
-        log.info("Farms size is : " + farms.size());
+        return farmMapper.convertToDTOList(farms);
+    }
+
+    public List<FarmDTO> searchFarms(FarmCriteria criteria) throws ResourceNotFoundException {
+        log.info("Criteria object : " + criteria);
+        Specification<Farm> spec = FarmSpecification.withFilters(criteria);
+        List<Farm> farms = farmRepository.findAll(spec);
+        if (farms.isEmpty())
+            throw new ResourceNotFoundException("Farm not found");
         return farmMapper.convertToDTOList(farms);
     }
 

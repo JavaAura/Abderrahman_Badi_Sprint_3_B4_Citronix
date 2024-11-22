@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.citronix.dto.FarmCriteria;
 import com.citronix.dto.FarmDTO;
 import com.citronix.exceptions.InvalidDataException;
 import com.citronix.exceptions.ResourceNotFoundException;
@@ -65,7 +66,7 @@ public class FarmController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
-    public List<FarmDTO> fetchFarmList() {
+    public List<FarmDTO> fetchFarmList() throws InvalidDataException {
         return farmService.getAllFarms();
     }
 
@@ -87,6 +88,26 @@ public class FarmController {
             throws ResourceNotFoundException, InvalidDataException {
         return farmService.getFarmById(farmId, "fields");
     }
+
+
+        /**
+     * Handles GET requests to fetch a farm by its id.
+     * 
+     * @return a farm entity
+     */
+    @Operation(summary = "Get a farm by ID", description = "Fetches a farm entity by its ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the farm"),
+            @ApiResponse(responseCode = "400", description = "Invalid input data"),
+            @ApiResponse(responseCode = "404", description = "Farm not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @GetMapping("/search")
+    public List<FarmDTO> searchFarms (
+            @Parameter(description = "Farm fields to search") FarmCriteria farmCriteria) throws ResourceNotFoundException {
+        return farmService.searchFarms(farmCriteria);
+    }
+
 
     /**
      * Handles PUT requests to update an existing farm.

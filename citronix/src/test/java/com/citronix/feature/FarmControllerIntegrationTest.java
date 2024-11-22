@@ -28,6 +28,18 @@ public class FarmControllerIntegrationTest extends BaseDev {
 	}
 
 	@Test
+	public void searchFarms_success() {
+		RestAssured
+				.given()
+				.accept(ContentType.JSON)
+				.when()
+				.get("/api/farms/search?name=Farm")
+				.then()
+				.statusCode(HttpStatus.OK.value())
+				.body("size()", Matchers.equalTo(5));
+	}
+
+	@Test
 	public void getOneFarm_success() {
 		RestAssured
 				.given()
