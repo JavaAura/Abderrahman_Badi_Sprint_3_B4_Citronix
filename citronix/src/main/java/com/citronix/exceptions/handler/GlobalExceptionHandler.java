@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.citronix.exceptions.InvalidDataException;
+import com.citronix.exceptions.InvalidSurfaceException;
 import com.citronix.exceptions.ResourceNotFoundException;
 
 import java.time.LocalDate;
@@ -26,10 +27,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(InvalidSurfaceException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidSurfaceException(InvalidSurfaceException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), ex.getMessage(),
+                HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
         ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), ex.getMessage(),
-                HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+                HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }

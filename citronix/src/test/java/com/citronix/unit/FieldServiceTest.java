@@ -18,8 +18,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.citronix.dto.FarmDTO;
 import com.citronix.dto.FieldDTO;
+import com.citronix.exceptions.InvalidSurfaceException;
 import com.citronix.exceptions.ResourceNotFoundException;
+import com.citronix.mapper.FieldMapper;
+import com.citronix.model.Farm;
 import com.citronix.model.Field;
 import com.citronix.repository.FieldRepository;
 import com.citronix.service.FieldService;
@@ -31,19 +35,29 @@ public class FieldServiceTest {
     @Mock
     private FieldRepository fieldRepository;
 
+    @Mock
+    private FieldMapper fieldMapper;
+
     private Field field;
+    private FieldDTO fieldDTO;
+    private Farm farm;
+    private FarmDTO farmDTO;
 
     @BeforeEach
     void setUp() {
-        field = new Field(null, 1000D, null, null, null, null, null);
+        farm = new Farm(1L, null, null, 5000D, null, null, null, null);
+        farmDTO = new FarmDTO(1L, null, null, 5000D, null);
+        field = new Field(null, 1000D, null, null, null, farm, null);
+        fieldDTO = new FieldDTO(null, 1000D, farmDTO, null, null);
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testAddField() {
+    void testAddField() throws InvalidSurfaceException {
 
         when(fieldRepository.save(field)).thenReturn(field);
-
+        when(fieldMapper.convertToDTO(field)).thenReturn(fieldDTO);
+        when(fieldRepository.checkFieldSurface(field.getFarm().getId(), field.getSurface(), 0)).thenReturn(true);
         FieldDTO result = fieldService.addField(field);
 
         assertNotNull(result);
@@ -55,10 +69,15 @@ public class FieldServiceTest {
     void testGetAllFields() {
         List<Field> fields = Arrays.asList(
                 field,
-                new Field(null, 1500D, null, null, null, null, null)
-        );
+                new Field(null, 1500D, null, null, null, null, null));
+
+        List<FieldDTO> fieldDTOs = Arrays.asList(
+                fieldDTO,
+                new FieldDTO(null, 1500D, null, null, null));
 
         when(fieldRepository.findAll()).thenReturn(fields);
+
+        when(fieldMapper.convertToDTOList(fields)).thenReturn(fieldDTOs);
 
         List<FieldDTO> result = fieldService.getAllFields();
 
@@ -68,9 +87,11 @@ public class FieldServiceTest {
         verify(fieldRepository, times(1)).findAll();
     }
 
-     @Test
-    void testGetFieldById_Success() {
+    @Test
+    void testGetFieldById_Success() throws ResourceNotFoundException {
         when(fieldRepository.findById(1L)).thenReturn(Optional.of(field));
+
+        when(fieldMapper.convertToDTO(field)).thenReturn(fieldDTO);
 
         FieldDTO result = fieldService.getFieldById(1L);
 
@@ -88,10 +109,17 @@ public class FieldServiceTest {
     }
 
     @Test
-    void testUpdateField() {
-        Field updatedField = new Field(null, 3000D, null, null, null, null, null);
+    void testUpdateField() throws ResourceNotFoundException, InvalidSurfaceException {
+
+        Field updatedField = new Field(null, 3000D, null, null, null, farm, null);
+        FieldDTO updatedFieldDTO = new FieldDTO(null, 3000D, farmDTO, null, null);
+
         when(fieldRepository.findById(1L)).thenReturn(Optional.of(field));
+
+        when(fieldRepository.checkFieldSurface(updatedField.getFarm().getId(), updatedField.getSurface(), 0)).thenReturn(true);
+
         when(fieldRepository.save(field)).thenReturn(updatedField);
+        when(fieldMapper.convertToDTO(updatedField)).thenReturn(updatedFieldDTO);
 
         FieldDTO result = fieldService.updateField(1L, updatedField);
 
@@ -102,7 +130,7 @@ public class FieldServiceTest {
     }
 
     @Test
-    void testDeleteField() {
+    void testDeleteField() throws ResourceNotFoundException {
         when(fieldRepository.findById(1L)).thenReturn(Optional.of(field));
         doNothing().when(fieldRepository).delete(field);
 

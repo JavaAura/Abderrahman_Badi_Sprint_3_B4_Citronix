@@ -17,7 +17,7 @@ public class TreeDTO {
     private Long id;
     private Integer age;
     private Double annualProductivity;
-    private LocalDate PlantedAt;
+    private LocalDate plantedAt;
     private FieldDTO field;
     private List<HarvestDetailDTO> harvestDetails;
 
