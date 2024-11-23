@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.citronix.dto.TreeDTO;
 import com.citronix.exceptions.InsufficientSurfaceException;
 import com.citronix.exceptions.InvalidDataException;
-import com.citronix.exceptions.InvalidSurfaceException;
 import com.citronix.exceptions.ResourceNotFoundException;
 import com.citronix.model.Tree;
 import com.citronix.service.TreeService;
@@ -53,7 +52,7 @@ public class TreeController {
 	})
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public TreeDTO saveTree(@Valid @RequestBody Tree tree) throws InvalidSurfaceException, InsufficientSurfaceException {
+	public TreeDTO saveTree(@Valid @RequestBody Tree tree) throws InsufficientSurfaceException {
 		return treeService.addTree(tree);
 	}
 
@@ -61,6 +60,7 @@ public class TreeController {
 	 * Handles GET requests to fetch the list of all trees.
 	 * 
 	 * @return a list of tree entities
+	 * @throws InvalidDataException
 	 */
 	@Operation(summary = "Get all trees", description = "Fetches a list of all trees in the system.")
 	@ApiResponses(value = {
@@ -76,6 +76,8 @@ public class TreeController {
 	 * Handles GET requests to fetch a tree by its id.
 	 * 
 	 * @return a tree entity
+	 * @throws InvalidDataException
+	 * @throws ResourceNotFoundException
 	 */
 	@Operation(summary = "Get a tree by ID", description = "Fetches a tree entity by its ID.")
 	@ApiResponses(value = {
@@ -98,6 +100,7 @@ public class TreeController {
 	 * @param treeId the ID of the tree to be updated
 	 * @return the updated tree entity
 	 * @throws InsufficientSurfaceException
+	 * @throws ResourceNotFoundException
 	 */
 	@Operation(summary = "Update an existing tree", description = "Updates a tree entity identified by its ID.")
 	@ApiResponses(value = {
@@ -119,6 +122,7 @@ public class TreeController {
 	 * 
 	 * @param treeId the ID of the tree to be deleted
 	 * @return a success message
+	 * @throws ResourceNotFoundException
 	 */
 	@Operation(summary = "Delete a tree by ID", description = "Deletes a tree entity identified by its ID.")
 	@ApiResponses(value = {

@@ -20,5 +20,4 @@ public class TreeDTO {
     private LocalDate plantedAt;
     private FieldDTO field;
     private List<HarvestDetailDTO> harvestDetails;
-
 }
