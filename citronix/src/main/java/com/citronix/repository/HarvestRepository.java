@@ -15,6 +15,6 @@ import com.citronix.model.enums.Season;
 public interface HarvestRepository extends JpaRepository<Harvest, Long> {
 
     @Query(value = "SELECT CASE WHEN COUNT(hr) > 0 THEN TRUE ELSE FALSE END FROM Harvest hr WHERE hr.season = :season AND hr.harvestYear = :harvestYear")
-    public boolean checkHarvestSeasonExists(Season season, Integer harvestYear);
+    boolean checkHarvestSeasonExists(Season season, Integer harvestYear);
 
 }
