@@ -1,6 +1,5 @@
 package com.citronix.mapper;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +38,8 @@ public class TreeMapper {
         return TreeDTO.builder()
                 .id(tree.getId())
                 .plantedAt(tree.getPlantedAt())
+                .age(tree.getAge())
+                .annualProductivity(tree.getAnnualProductivity())
                 .build();
     }
 
@@ -53,7 +54,7 @@ public class TreeMapper {
 
         FarmDTO farmDTO = null;
         FieldDTO fieldDTO = null;
-        List<HarvestDetailDTO> harvestDetailDTOs = new ArrayList<>();
+        List<HarvestDetailDTO> harvestDetailDTOs = null;
 
         if (includesList.contains("field")) {
             Field field = tree.getField();
@@ -99,6 +100,8 @@ public class TreeMapper {
         return TreeDTO.builder()
                 .id(tree.getId())
                 .plantedAt(tree.getPlantedAt())
+                .age(tree.getAge())
+                .annualProductivity(tree.getAnnualProductivity())
                 .field(fieldDTO)
                 .harvestDetails(harvestDetailDTOs)
                 .build();

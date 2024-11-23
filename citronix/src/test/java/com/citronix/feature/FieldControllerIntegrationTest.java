@@ -118,7 +118,7 @@ public class FieldControllerIntegrationTest extends BaseDev {
 	}
 
 	@Test
-	void createField_throwsInvalidSurfaceException() {
+	void createField_throwsInvalidSurface() {
 		RestAssured
 				.given()
 				.contentType(ContentType.JSON)
