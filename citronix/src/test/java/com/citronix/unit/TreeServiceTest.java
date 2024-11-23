@@ -28,6 +28,7 @@ import com.citronix.model.Field;
 import com.citronix.model.Tree;
 import com.citronix.repository.TreeRepository;
 import com.citronix.service.TreeService;
+import com.citronix.util.TreeServiceHelper;
 
 public class TreeServiceTest {
     @InjectMocks
@@ -38,6 +39,9 @@ public class TreeServiceTest {
 
     @Mock
     private TreeMapper treeMapper;
+
+    @Mock
+    private TreeServiceHelper treeServiceHelper;
 
     private Tree tree;
     private Field field;
@@ -64,6 +68,8 @@ public class TreeServiceTest {
 
         when(treeRepository.checkFieldSurface(1L)).thenReturn(true);
 
+        when(treeServiceHelper.calculateTreeAgeAndAnnualProductivity(tree)).thenReturn(tree);
+
         TreeDTO result = treeService.addTree(tree);
 
         assertNotNull(result);
@@ -85,6 +91,8 @@ public class TreeServiceTest {
 
         when(treeMapper.convertToDTOList(trees)).thenReturn(treeDTOs);
 
+        when(treeServiceHelper.calculateTreeAgeAndAnnualProductivity(tree)).thenReturn(tree);
+
         List<TreeDTO> result = treeService.getAllTrees();
 
         assertNotNull(result);
@@ -97,6 +105,7 @@ public class TreeServiceTest {
     void testGetTreeById_Success() throws ResourceNotFoundException {
         when(treeRepository.findById(1L)).thenReturn(Optional.of(tree));
         when(treeMapper.convertToDTO(tree)).thenReturn(treeDTO);
+        when(treeServiceHelper.calculateTreeAgeAndAnnualProductivity(tree)).thenReturn(tree);
 
         TreeDTO result = treeService.getTreeById(1L);
 
@@ -123,6 +132,8 @@ public class TreeServiceTest {
         
         when(treeRepository.save(tree)).thenReturn(updatedTree);
         when(treeMapper.convertToDTO(updatedTree)).thenReturn(updatedTreeDTO);
+
+        when(treeServiceHelper.calculateTreeAgeAndAnnualProductivity(updatedTree)).thenReturn(updatedTree);
 
         TreeDTO result = treeService.updateTree(1L, updatedTree);
 
