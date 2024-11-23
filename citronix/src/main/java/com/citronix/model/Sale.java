@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
@@ -38,6 +39,7 @@ import lombok.Setter;
 @Data
 @Table(name = "sales")
 @Where(clause = "removed_at IS NULL")
+@SQLDelete(sql = "UPDATE sales SET removed_at = CURRENT_TIMESTAMP WHERE id=?")
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

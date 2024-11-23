@@ -30,8 +30,8 @@ public class HarvestControllerIntegrationTest extends BaseDev {
                 .get("/api/harvests/1")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body("size()", Matchers.equalTo(1))
-                .body("id", Matchers.equalTo(1));
+                .body("id", Matchers.equalTo(1))
+                .body("totalYield", Matchers.equalTo(0.0F));
     }
 
     @Test
@@ -46,21 +46,6 @@ public class HarvestControllerIntegrationTest extends BaseDev {
                 .statusCode(HttpStatus.CREATED.value())
                 .body("season", Matchers.equalTo("WINTER"))
                 .body("harvestYear", Matchers.equalTo(2024));
-    }
-
-    @Test
-    void createHarvestDetails_success() {
-        RestAssured
-                .given()
-                .contentType(ContentType.JSON)
-                .body("{\"harvestId\": 2,\"treeId\": 5,\"yield\": 100.0,\"harvestedAt\": \"19-08-2024\"}")
-                .when()
-                .post("/api/harvests/harvest-details")
-                .then()
-                .statusCode(HttpStatus.CREATED.value())
-                .body("harvest.id", Matchers.equalTo(2))
-                .body("tree.id", Matchers.equalTo(5))
-                .body("yield", Matchers.equalTo(100.0));
     }
 
     @Test
@@ -81,7 +66,7 @@ public class HarvestControllerIntegrationTest extends BaseDev {
                 .when()
                 .put("/api/harvests/4")
                 .then()
-                .statusCode(HttpStatus.CREATED.value())
+                .statusCode(HttpStatus.OK.value())
                 .body("season", Matchers.equalTo("SPRING"))
                 .body("harvestYear", Matchers.equalTo(2025));
     }

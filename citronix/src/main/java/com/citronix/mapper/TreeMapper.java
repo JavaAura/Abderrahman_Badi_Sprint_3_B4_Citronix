@@ -19,7 +19,6 @@ import com.citronix.model.Tree;
 
 @Component
 public class TreeMapper {
-
     private final List<String> VALID_INCLUDES = Arrays.asList("field", "field.farm", "harvestDetails",
             "harvestDetails.harvest");
 

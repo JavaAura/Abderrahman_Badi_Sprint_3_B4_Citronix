@@ -159,8 +159,6 @@ databaseChangeLog:
               - column:
                   name: total_yield
                   type: DOUBLE
-                  constraints:
-                    nullable: false
               - column:
                   name: created_at
                   type: TIMESTAMP
