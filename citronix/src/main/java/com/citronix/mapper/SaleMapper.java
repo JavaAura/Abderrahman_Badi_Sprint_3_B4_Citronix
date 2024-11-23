@@ -1,11 +1,11 @@
 package com.citronix.mapper;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.citronix.dto.SaleDTO;
 import com.citronix.model.Sale;
 
-@Service
+@Component
 public class SaleMapper {
 
 }

@@ -139,7 +139,7 @@ public class FarmControllerIntegrationTest extends BaseDev {
 				.when()
 				.post("/api/farms")
 				.then()
-				.statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+				.statusCode(HttpStatus.BAD_REQUEST.value())
 				.body("message", Matchers.notNullValue())
 				.body("status", Matchers.equalTo(500));
 	}

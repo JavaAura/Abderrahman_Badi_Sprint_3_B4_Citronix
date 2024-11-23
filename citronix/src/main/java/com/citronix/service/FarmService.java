@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.citronix.dto.FarmCriteria;
 import com.citronix.dto.FarmDTO;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
  * Service interface for Farm entity.
  * Defines methods for CRUD operations and additional business logic.
  */
-@Component
+@Service
 @Log4j2
 public class FarmService {
 

@@ -43,9 +43,9 @@ public class Tree {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private transient int age;
+    private transient Integer age;
 
-    private transient double annualProductivity;
+    private transient Double annualProductivity;
 
     @NotNull
     @JsonFormat(pattern = "dd-MM-yyyy")

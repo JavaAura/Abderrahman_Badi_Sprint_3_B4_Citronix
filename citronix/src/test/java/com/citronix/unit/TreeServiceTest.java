@@ -19,8 +19,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.citronix.dto.FieldDTO;
 import com.citronix.dto.TreeDTO;
+import com.citronix.exceptions.InsufficientSurfaceException;
 import com.citronix.exceptions.ResourceNotFoundException;
+import com.citronix.mapper.TreeMapper;
+import com.citronix.model.Field;
 import com.citronix.model.Tree;
 import com.citronix.repository.TreeRepository;
 import com.citronix.service.TreeService;
@@ -32,18 +36,33 @@ public class TreeServiceTest {
     @Mock
     private TreeRepository treeRepository;
 
+    @Mock
+    private TreeMapper treeMapper;
+
     private Tree tree;
+    private Field field;
+    private TreeDTO treeDTO;
+    private FieldDTO fieldDTO;
 
     @BeforeEach
     void setUp() {
-        tree = new Tree(1L, 10, 200, LocalDate.of(2014, 02, 24), null, null, null, null, null);
+        field = new Field();
+        fieldDTO = new FieldDTO();
+        field.setId(1L);
+        fieldDTO.setId(1L);
+        tree = new Tree(1L, null, null, LocalDate.of(2014, 02, 24), null, null, null, field, null);
+        treeDTO = new TreeDTO(1L, null, null, LocalDate.of(2014, 02, 24), fieldDTO, null);
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testAddTree() {
+    void testAddTree() throws InsufficientSurfaceException {
 
         when(treeRepository.save(tree)).thenReturn(tree);
+
+        when(treeMapper.convertToDTO(tree)).thenReturn(treeDTO);
+
+        when(treeRepository.checkFieldSurface(1L)).thenReturn(true);
 
         TreeDTO result = treeService.addTree(tree);
 
@@ -56,9 +75,15 @@ public class TreeServiceTest {
     void testGetAllTrees() {
         List<Tree> trees = Arrays.asList(
                 tree,
-                new Tree(null, 0, 0, null, null, null, null, null, null));
+                new Tree(null, null, null, LocalDate.of(2013, 02, 24), null, null, null, null, null));
+
+        List<TreeDTO> treeDTOs = Arrays.asList(
+                treeDTO,
+                new TreeDTO(null, null, null, LocalDate.of(2013, 02, 24), null, null));
 
         when(treeRepository.findAll()).thenReturn(trees);
+
+        when(treeMapper.convertToDTOList(trees)).thenReturn(treeDTOs);
 
         List<TreeDTO> result = treeService.getAllTrees();
 
@@ -69,8 +94,9 @@ public class TreeServiceTest {
     }
 
     @Test
-    void testGetTreeById_Success() {
+    void testGetTreeById_Success() throws ResourceNotFoundException {
         when(treeRepository.findById(1L)).thenReturn(Optional.of(tree));
+        when(treeMapper.convertToDTO(tree)).thenReturn(treeDTO);
 
         TreeDTO result = treeService.getTreeById(1L);
 
@@ -88,10 +114,15 @@ public class TreeServiceTest {
     }
 
     @Test
-    void testUpdateTree() {
-        Tree updatedTree = new Tree(1L, 11, 200, LocalDate.of(2013, 02, 24), null, null, null, null, null);
+    void testUpdateTree() throws ResourceNotFoundException, InsufficientSurfaceException {
+        Tree updatedTree = new Tree(1L, 11, null, LocalDate.of(2013, 02, 24), null, null, null, field, null);
+        TreeDTO updatedTreeDTO = new TreeDTO(1L, 11, null, LocalDate.of(2013, 02, 24), fieldDTO, null);
+
         when(treeRepository.findById(1L)).thenReturn(Optional.of(tree));
+        when(treeRepository.checkFieldSurface(1L)).thenReturn(true);
+        
         when(treeRepository.save(tree)).thenReturn(updatedTree);
+        when(treeMapper.convertToDTO(updatedTree)).thenReturn(updatedTreeDTO);
 
         TreeDTO result = treeService.updateTree(1L, updatedTree);
 
@@ -103,7 +134,7 @@ public class TreeServiceTest {
     }
 
     @Test
-    void testDeleteTree() {
+    void testDeleteTree() throws ResourceNotFoundException {
         when(treeRepository.findById(1L)).thenReturn(Optional.of(tree));
         doNothing().when(treeRepository).delete(tree);
 

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.citronix.exceptions.InsufficientSurfaceException;
 import com.citronix.exceptions.InvalidDataException;
 import com.citronix.exceptions.InvalidSurfaceException;
 import com.citronix.exceptions.ResourceNotFoundException;
@@ -29,6 +30,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidSurfaceException.class)
     public ResponseEntity<ErrorResponse> handleInvalidSurfaceException(InvalidSurfaceException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), ex.getMessage(),
+                HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InsufficientSurfaceException.class)
+    public ResponseEntity<ErrorResponse> handleInsufficientSurfaceException(InsufficientSurfaceException ex) {
         ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), ex.getMessage(),
                 HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
