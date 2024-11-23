@@ -4,21 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
-import com.citronix.util.HarvestDetailId;
+import com.citronix.util.HarvestDetailPk;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -36,19 +34,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@IdClass(HarvestDetailId.class)
 @Table(name = "harvest_tree")
-@Where(clause = "removed_at IS NULL")
-@SQLDelete(sql = "UPDATE harvest_tree SET removed_at = CURRENT_TIMESTAMP WHERE id=?")
 public class HarvestDetail {
 
-    @Id
+    @EmbeddedId
+    private HarvestDetailPk HarvestDetailPk = new HarvestDetailPk();
+
     @ManyToOne
+    @MapsId("treeId")
     @JoinColumn(name = "tree_id")
     private Tree tree;
 
-    @Id
     @ManyToOne
+    @MapsId("harvestId")
     @JoinColumn(name = "harvest_id")
     private Harvest harvest;
 
@@ -67,7 +65,4 @@ public class HarvestDetail {
     @UpdateTimestamp
     @Column(nullable = true)
     private LocalDateTime updatedAt;
-
-    @Column(nullable = true)
-    private LocalDateTime removedAt;
 }

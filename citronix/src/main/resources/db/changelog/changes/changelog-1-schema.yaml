@@ -205,9 +205,6 @@ databaseChangeLog:
               - column:
                   name: updated_at
                   type: TIMESTAMP
-              - column:
-                  name: removed_at
-                  type: TIMESTAMP
 
 
         - createTable:

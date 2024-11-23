@@ -25,6 +25,7 @@ import org.hibernate.annotations.Where;
 import com.citronix.model.enums.Season;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "harvests")
 @Where(clause = "removed_at IS NULL")
 @SQLDelete(sql = "UPDATE harvests SET removed_at = CURRENT_TIMESTAMP WHERE id=?")
@@ -73,7 +75,6 @@ public class Harvest {
     private List<HarvestDetail> harvestDetails;
 
     @OneToOne(mappedBy = "harvest")
-    @Null
     private Sale sale;
 
 }
