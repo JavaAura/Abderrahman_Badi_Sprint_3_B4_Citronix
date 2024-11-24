@@ -141,6 +141,6 @@ public class FarmControllerIntegrationTest extends BaseDev {
 				.then()
 				.statusCode(HttpStatus.BAD_REQUEST.value())
 				.body("message", Matchers.notNullValue())
-				.body("status", Matchers.equalTo(500));
+				.body("status", Matchers.equalTo(400));
 	}
 }

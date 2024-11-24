@@ -23,6 +23,7 @@ import org.hibernate.annotations.Where;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "trees")
 @Where(clause = "removed_at IS NULL")
 @SQLDelete(sql = "UPDATE trees SET removed_at = CURRENT_TIMESTAMP WHERE id=?")

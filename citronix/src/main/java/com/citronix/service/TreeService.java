@@ -1,6 +1,5 @@
 package com.citronix.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +13,7 @@ import com.citronix.exceptions.ResourceNotFoundException;
 import com.citronix.mapper.TreeMapper;
 import com.citronix.model.Tree;
 import com.citronix.repository.TreeRepository;
+import com.citronix.util.TreeServiceHelper;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -28,31 +28,34 @@ public class TreeService {
     private TreeRepository treeRepository;
 
     @Autowired
+    private TreeServiceHelper treeServiceHelper;
+
+    @Autowired
     private TreeMapper treeMapper;
 
     public TreeDTO getTreeById(long id) throws ResourceNotFoundException {
         Tree tree = treeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tree not found"));
-        calculateTreeAgeAndAnnualProductivity(tree);
+        treeServiceHelper.calculateTreeAgeAndAnnualProductivity(tree);
         return treeMapper.convertToDTO(tree);
     }
 
     public TreeDTO getTreeById(long id, String... with) throws ResourceNotFoundException, InvalidDataException {
         treeMapper.verifyIncludes(with);
         Tree tree = treeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tree not found"));
-        calculateTreeAgeAndAnnualProductivity(tree);
+        treeServiceHelper.calculateTreeAgeAndAnnualProductivity(tree);
         return treeMapper.convertToDTO(tree, with);
     }
 
     public List<TreeDTO> getAllTrees(String... with) throws InvalidDataException {
         treeMapper.verifyIncludes(with);
         List<Tree> trees = treeRepository.findAll();
-        trees.forEach(tree -> calculateTreeAgeAndAnnualProductivity(tree));
+        trees.forEach(tree -> treeServiceHelper.calculateTreeAgeAndAnnualProductivity(tree));
         return treeMapper.convertToDTOList(trees, with);
     }
 
     public List<TreeDTO> getAllTrees() {
         List<Tree> trees = treeRepository.findAll();
-        trees.forEach(tree -> calculateTreeAgeAndAnnualProductivity(tree));
+        trees.forEach(tree -> treeServiceHelper.calculateTreeAgeAndAnnualProductivity(tree));
         return treeMapper.convertToDTOList(trees);
     }
 
@@ -62,7 +65,7 @@ public class TreeService {
         }
 
         Tree createdTree = treeRepository.save(tree);
-        calculateTreeAgeAndAnnualProductivity(createdTree);
+        treeServiceHelper.calculateTreeAgeAndAnnualProductivity(createdTree);
         return treeMapper.convertToDTO(createdTree);
     }
 
@@ -82,7 +85,7 @@ public class TreeService {
         }
 
         Tree updatedTree = treeRepository.save(treeDB);
-        calculateTreeAgeAndAnnualProductivity(updatedTree);
+        treeServiceHelper.calculateTreeAgeAndAnnualProductivity(updatedTree);
         return treeMapper.convertToDTO(updatedTree);
     }
 
@@ -96,20 +99,5 @@ public class TreeService {
         return treeRepository.checkFieldSurface(tree.getField().getId());
     }
 
-    public Tree calculateTreeAgeAndAnnualProductivity(Tree tree) {
-        int age = LocalDate.now().getYear() - tree.getPlantedAt().getYear();
-        tree.setAge(age);
-
-        if (age < 3) {
-            tree.setAnnualProductivity(2.5D);
-        }
-        if (age <= 10) {
-            tree.setAnnualProductivity(12D);
-        }
-        if (age > 10) {
-            tree.setAnnualProductivity(20D);
-        }
-
-        return tree;
-    }
+    
 }
